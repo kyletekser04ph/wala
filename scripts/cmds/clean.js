@@ -6,9 +6,9 @@ const path = require('path');
 module.exports = {
   config: {
     name: "clean",
-    aliases: ["cl"],
+    aliases: ["cl","trash","th","limpyo","bawas","tanggal"],
     version: "1.6",
-    author: "Subash",
+    author: "kylepogi",
     countDown: 1,
     role: 2,
     category: "utility",
@@ -21,7 +21,7 @@ module.exports = {
   },
 
   onStart: async function ({ args, api, event }) {
-    const directoriesToDelete = ['cache', 'tmp'];
+    const directoriesToDelete = ['tmp'];
     const fileName = args[0];
 
     try {
@@ -78,7 +78,7 @@ module.exports = {
           return total + files.length;
         }, 0);
 
-        api.sendMessage(`╭┈ ❒ 𝗖𝗟𝗘𝗔𝗡𝗜𝗡𝗚:\n\n╰┄◉➣ ✅|Deleted all caches and temp files \n╰┄◉➣ from the system 💻 Directories|🗂️.`, event.threadID);
+        api.sendMessage(`╭┈ ♻️ 𝗖𝗟𝗘𝗔𝗡𝗜𝗡𝗚:\n\n╰┄◉➣ ✅|Deleted all caches and temp files \n╰┄◉➣ from the system Directories🚮`, event.threadID);
       }
     } catch (err) {
       console.error(err);
