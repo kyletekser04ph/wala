@@ -43,8 +43,8 @@ wrapText: async (ctx, text, maxWidth) => {
 
 onStart: async function ({ api, event, args, client, __GLOBAL, usersData, threadsData }) {
 	let { senderID, threadID, messageID } = event;
-	let avatar = __dirname + '/cache/avt.png';
-	let pathImg = __dirname + '/cache/wew.png';
+	let avatar = __dirname + '/tmp/avt.png';
+	let pathImg = __dirname + '/tmp/wew.png';
 	var text = args.join(" ");
 	let name = (await api.getUserInfo(senderID))[senderID].name
 	var linkAvatar = (await api.getUserInfo(senderID))[senderID].thumbSrc;
