@@ -31,7 +31,7 @@ module.exports = {
 		},
 		en: {
 			missingMessage: "Please enter the message you want to send to all groups",
-			notification: "❗𝗡𝗼𝘁𝗶𝗳𝗶𝗰𝗮𝘁𝗶𝗼𝗻 𝖿𝗋𝗈𝗆 𝖺𝖽𝗆𝗂𝗇 𝖻𝗈𝗍 𝗍𝗈 𝖺𝗅𝗅 𝖼𝗁𝖺𝗍 𝗀𝗋𝗈𝗎𝗉𝗌",
+			notification: "📨 𝗡𝗼𝘁𝗶𝗳𝗶𝗰𝗮𝘁𝗶𝗼𝗻 𝖿𝗋𝗈𝗆 𝖺𝖽𝗆𝗂𝗇 𝖻𝗈𝗍 𝗍𝗈 𝖺𝗅𝗅 𝖼𝗁𝖺𝗍 𝗀𝗋𝗈𝗎𝗉𝗌",
 			sendingNotification: "Start sending notification from admin bot to %1 chat groups",
 			sentNotification: "✅ Sent notification to %1 groups successfully",
 			errorSendingNotification: "An error occurred while sending to %1 groups:\n%2"
@@ -43,7 +43,7 @@ module.exports = {
 		if (!args[0])
 			return message.reply(getLang("missingMessage"));
 		const formSend = {
-			body: `${getLang("notification")}\n━━━━━━━━━━━━━━━━━━━\n╭┈ ❒ 💬 -𝗠𝗘𝗦𝗦𝗔𝗚𝗘:\n╰┈❃➣ ${args.join(" ")}\n━━━━━━━━━━━━━━━━━━━\nℹ️ 𝗽𝗹𝗲𝗮𝘀𝗲 𝖳𝗒𝗉𝖾: .callad 𝗍𝗈 𝗆𝖾𝗌𝗌𝖺𝗀𝖾 𝖻𝖺𝖼𝗄 𝖺𝖽𝗆𝗂𝗇'𝗌\n╰┈❃➣ 👤𝗈𝗐𝗇𝖾𝗋: Kylepogi\n╰┈❃➣ 🔗link: https://www.facebook.com/ profile. php?id=61566232924755\n╰┈❃➣ remove space!!(thanks for using my bot)`,
+			body: `${getLang("notification")}\n━━━━━━━━━━━━━━━━━━━\n╭┈ ❒ 💬 -𝗠𝗘𝗦𝗦𝗔𝗚𝗘:\n╰┈❃➣ ${args.join(" ")}\n━━━━━━━━━━━━━━━━━━━\nℹ️ 𝗽𝗹𝗲𝗮𝘀𝗲 𝖳𝗒𝗉𝖾: .callad 𝗍𝗈 𝗆𝖾𝗌𝗌𝖺𝗀𝖾 𝖻𝖺𝖼𝗄 𝖺𝖽𝗆𝗂𝗇'𝗌(thanks for using my bot)`,
 			attachment: await getStreamsFromAttachment(
 				[
 					...event.attachments,
