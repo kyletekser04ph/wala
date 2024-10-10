@@ -128,7 +128,7 @@ async function l({ api, message, event, args }) {
       const photoUrl = event.messageReply.attachments[0].url;
       n = args.join(" ").trim();
       const description = await describeImage(n, photoUrl);
-      message.reply(`𓃵 𝗭𝗘𝗣𝗛 𝗚𝗘𝗠𝗜𝗡𝗜:\n▬▬▬▬▬▬ ♊ ▬▬▬▬▬▬\n${description}`);
+      message.reply(`𓃵 𝗭𝗘𝗣𝗛 𝗚𝗘𝗠𝗜𝗡𝗜-𝗚𝗠𝗙𝗟𝗔𝗦𝗛𝟬𝟰 [♊]:\n━━━━━━━━━━━━━━━━━━\n${description}`);
       return;
     } else {
       n = args.join(" ").trim();
