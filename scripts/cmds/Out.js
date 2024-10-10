@@ -25,6 +25,6 @@ module.exports = {
  } else {
  id = parseInt(args.join(" "));
  }
- return api.sendMessage('𝗚𝗼𝗼𝗱𝗯𝘆𝗲....𝖨'𝗆 𝗅𝖾𝖺𝗏𝗂𝗇𝗀 𝗍𝗁𝗂𝗌 𝗀𝗋𝗈𝗎𝗉 𝖼𝖺𝗎𝗌𝖾𝖽 𝗈𝖿 𝖺𝖽𝗆𝗂𝗇𝗌 𝖼𝗈𝗆𝗆𝖺𝗇𝖽.', id, () => api.removeUserFromGroup(api.getCurrentUserID(), id))
+ return api.sendMessage('𝗚𝗼𝗼𝗱𝗯𝘆𝗲....𝖨𝗆 𝗅𝖾𝖺𝗏𝗂𝗇𝗀 𝗍𝗁𝗂𝗌 𝗀𝗋𝗈𝗎𝗉 𝖼𝖺𝗎𝗌𝖾𝖽 𝗈𝖿 𝖺𝖽𝗆𝗂𝗇(𝗌)  𝖼𝗈𝗆𝗆𝖺𝗇𝖽.', id, () => api.removeUserFromGroup(api.getCurrentUserID(), id))
 		}
 	};
