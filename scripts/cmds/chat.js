@@ -13,7 +13,7 @@ module.exports = {
         category: "box chat",
         countDown: 5,
         role: 0,
-        author: "cliff x kyle",
+        author: "kylepogi",
     },
     
     langs: {
