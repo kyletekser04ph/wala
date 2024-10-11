@@ -1,71 +1,100 @@
 const { GoatWrapper } = require('fca-liane-utils');
 const axios = require("axios");
-const fs = require("fs");
+const fs = require("fs-extra");
 const path = require("path");
+
+const services = [
+  { url: 'https://celestial-dainsleif-v2.onrender.com/pinterest', param: 'pinte' },
+];
+
+// Fetch images with modern async/await pattern, improved error handling, and performance optimization
+const fetchImages = async (url, params, fetchedImageUrls) => {
+  try {
+    const { data } = await axios.get(url, { params });
+    if (!Array.isArray(data) || data.length === 0) return [];
+
+    const imagePromises = data.slice(0, params.limit).map(async (item, index) => {
+      const imageUrl = item.image || item;
+      if (fetchedImageUrls.has(imageUrl)) return null;
+
+      fetchedImageUrls.add(imageUrl);
+      try {
+        const { data: imgBuffer } = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+        const imgPath = path.resolve(__dirname, 'tmp', `${index + 1}.jpg`);
+        await fs.outputFile(imgPath, imgBuffer);
+        return fs.createReadStream(imgPath);
+      } catch (err) {
+        console.warn(`Failed to download image ${imageUrl}: ${err.message}`);
+        return null;
+      }
+    });
+
+    return (await Promise.all(imagePromises)).filter(Boolean);
+  } catch (error) {
+    console.error(`Error fetching images from ${url}: ${error.message}`);
+    return [];
+  }
+};
+
+const getApiParams = (service, keySearch, limit) => ({ [service.param]: keySearch, limit });
 
 module.exports = {
   config: {
     name: "pinterest",
     aliases: ["pin"],
-    version: "1.0.2",
-    author: "JVB",
+    version: "1.0",
+    author: "Coffee",
     role: 0,
-    countDown: 50,
-    shortDescription: {
-      en: "Search for images on Pinterest"
-    },
-    longDescription: {
-      en: ""
-    },
+    countDown: 60,
+    shortDescription: { en: "Search for images on Pinterest" },
     category: "image",
-    guide: {
-      en: "{prefix}pinterest <search query> -<number of images>"
-    }
+    guide: { en: "{prefix}pinterest cat -5" }
   },
 
-  onStart: async function ({ api, event, args, usersData }) {
+  onStart: async function ({ api, event, args }) {
+    const tmpDir = path.resolve(__dirname, 'tmp');
+    await fs.ensureDir(tmpDir);
+
     try {
-      const userID = event.senderID;
-
-      const keySearch = args.join(" ");
-      if (!keySearch.includes("-")) {
-        return api.sendMessage(`Please enter the search query and number of images to return in the format: ${this.config.guide.en}`, event.threadID, event.messageID);
-      }
-      const keySearchs = keySearch.substr(0, keySearch.indexOf('-')).trim();
-      const numberSearch = parseInt(keySearch.split("-").pop().trim()) || 6;
-
-      const res = await axios.get(`https://celestial-dainsleif-v2.onrender.com/pinterest?pinte=${encodeURIComponent(keySearchs)}`);
-      const data = res.data;
-
-      if (!data || !Array.isArray(data) || data.length === 0) {
-        return api.sendMessage(`No image data found for "${keySearchs}". Please try another search query.`, event.threadID, event.messageID);
+      const keySearch = args.join(" ").trim();
+      if (!keySearch) {
+        return api.sendMessage("ℹ️ | Please follow this format:\npinterest blackcat -5", event.threadID, event.messageID);
       }
 
-      const imgData = [];
+      const [keySearchs, num] = keySearch.split('-').map(s => s.trim());
+      const numberSearch = Math.min(Math.max(parseInt(num, 10) || 3, 1), 15);
 
-      for (let i = 0; i < Math.min(numberSearch, data.length); i++) {
-        const imageUrl = data[i].image;
+      const fetchedImageUrls = new Set();
+      const apiPromises = services.map(async (service) => {
+        const { url } = service;
+        const params = getApiParams(service, keySearchs, numberSearch);
+        return fetchImages(url, params, fetchedImageUrls);
+      });
 
-        try {
-          const imgResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-          const imgPath = path.join(__dirname, 'cache', `${i + 1}.jpg`);
-          await fs.outputFile(imgPath, imgResponse.data);
-          imgData.push(fs.createReadStream(imgPath));
-        } catch (error) {
-          console.error(error);
-          // Handle image fetching errors (skip the problematic image)
-        }
+      const results = await Promise.allSettled(apiPromises);
+      const successfulResults = results
+        .filter(result => result.status === 'fulfilled')
+        .flatMap(result => result.value);
+
+      if (successfulResults.length === 0) throw new Error("No images found.");
+
+      let messageBody = `Here are ${successfulResults.length} results for "${keySearchs}":`;
+      if (isNaN(parseInt(num, 10))) {
+        messageBody += "\nThe number wasn't specified. To specify, use:\npinterest blackcat -5.";
       }
 
       await api.sendMessage({
-        attachment: imgData,
-        body: `🖼 | Here are the top ${imgData.length} image results for "${keySearchs}":`
+        attachment: successfulResults,
+        body: messageBody
       }, event.threadID, event.messageID);
-
-      await fs.remove(path.join(__dirname, 'cache'));
     } catch (error) {
-      console.error(error);
-      return api.sendMessage(`An error occurred. Please try again later.`, event.threadID, event.messageID);
+      console.error(`Error occurred: ${error.message}`);
+      const errorMessage = error.message === "No images found."
+        ? "(⁠ ⁠･ั⁠﹏⁠･ั⁠) can't fetch images, api dead."
+        : `📷 | ${error.message}`;
+      await api.sendMessage(errorMessage, event.threadID, event.messageID);
+    } finally {
+      await fs.remove(tmpDir);
     }
   }
 };
