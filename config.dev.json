@@ -6,26 +6,23 @@
     "i_user": "",
     "proxy": null,
     "userAgent": "Mozilla/5.0 (Linux; Android 12; M2102J20SG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Mobile Safari/537.36",
-    "intervalGetNewCookie": 432069,
+    "intervalGetNewCookie": 4320990,
     "notes": "time the system automatically retrieves new cookies from email/password, unit is minute, if you set null, the system will not automatically retrieve new cookies, it saves you from having to manually change your cookie every time it expires. recommended set to 1440 (1day) or 4320 (3day).TO BE ABLE TO USE THIS FEATURE YOU NEED TO ENTER THE ACCOUNT PASSWORD ABOVE"
   },
-  "antiInbox": false, 
+  "antiInbox": false,
   "language": "en",
   "notesLanguage": "change to your language with ISO 639-1 code, available languages: vi (Vietnamese), en (English)",
   "adminOnly": {
     "enable": false,
     "ignoreCommand": []
   },
-  "adminBot": [
-    "61566232924755"
-  ],
+  "adminBot": ["100052395031835"],
   "whiteListMode": {
     "enable": false,
-    "whiteListIds": ["61566232924755"
-    ],
+    "whiteListIds": ["100052395031835",""],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
-  "nickNameBot": "𝗭𝗘𝗣𝗛𝗬𝗥𝗨𝗦 𝗔𝗜",
+  "nickNameBot": " [ . ] ☯➢ •𝗭𝗘𝗣𝗛𝗩𝟮 ⧽⧽「 𝗈𝗐𝗇𝖾𝗋:𝗞𝗬𝗟𝗘敦. ဗီူ 」⧼⧼",
   "prefix": ".",
   "database": {
     "type": "sqlite",
@@ -37,15 +34,15 @@
   "timeZone": "Asia/Manila",
   "credentials": {
     "gmailAccount": {
-      "email": "kivlynx42@gmail.com",
-      "clientId": "91590230522-e1dmfhcafq18elgiol1ei804juc001te.apps.googleusercontent.com",
-      "clientSecret": "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",
-      "refreshToken": "1//04bcdN3JjJ2iyCgYIARAAGAQSNwF-L9IrnDnX6pDMzazChDzlcQoEBgS6qdHkG0MjjvIVu5nHTVK5e2ysIIIBTo5vBGU7dZF__9s",
+      "email": "kyutashiixdd@gmail.com",
+      "clientId": "703210852639-ic8u4br6bdo6jg6dgguirqi7jkgbpl6l.apps.googleusercontent.com",
+      "clientSecret": "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",
+      "refreshToken": "1//04svAaCtGHs-ICgYIARAAGAQSNwF-L9IrjiQvNzr409HIVspHncIVnrz7ZI5VxTU3dvw5TwHLZi1BhYEwEJNs9YpLDm7xDEBt1fU",
       "apiKey": ""
     },
     "gRecaptcha": {
-      "siteKey": "6LfBCS0pAAAAAKrRaCEHnfImGVND054pd2V-iH0E",
-      "secretKey": "6LfBCS0pAAAAAPUqNse_9WePxAuiKvRAz1ixhSkP"
+      "siteKey": "6LesKYgpAAAAAOKKCkeeHYPSi0ublhQ0wRa6Axuq",
+      "secretKey": "6LesKYgpAAAAAL4fodXBHXocKQzvP9uXLFvavI18"
     }
   },
   "dashBoard": {
@@ -54,7 +51,7 @@
     "port": 3001
   },
   "serverUptime": {
-    "enable": false,
+    "enable": true,
     "port": 3001,
     "socket": {
       "enable": true,
@@ -63,13 +60,13 @@
     }
   },
   "autoRestart": {
-    "time": null,
+    "time": 86400000,
     "notes": "you can set time is interval with milisecond or cron time, example: 1000, 10000, 60000, 3600000, 86400000, 0 0 * * *,... docs: https://www.npmjs.com/package/node-cron. If you set time is 0 or false or null, the bot will not auto restart"
   },
   "autoUptime": {
-    "enable": false,
-    "timeInterval": 180,
-    "url": "",
+    "enable": true,
+    "timeInterval": 500,
+    "url": "https://uptime.botrandom30.repl.co",
     "notes": "the value of timeInterval is seconds, url is the url you want to send the request to (automatically detected for hosting glitch or replit)"
   },
   "autoLoadScripts": {
@@ -82,10 +79,10 @@
   "autoReloginWhenChangeAccount": false,
   "autoRestartWhenListenMqttError": false,
   "restartListenMqtt": {
-    "enable": true,
-    "timeRestart": 3600000,
-    "delayAfterStopListening": 2000,
-    "logNoti": true,
+    "disable": false,
+    "timeRestart": 0,
+    "delayAfterStopListening": 0,
+    "logNoti": false,
     "notes": "the value of timeRestart and delayAfterStopListening is milisecond, You shouldn't edit this if you don't know what it is"
   },
   "notiWhenListenMqttError": {
@@ -108,11 +105,10 @@
     }
   },
   "hideNotiMessage": {
-    "commandNotFound": false,
+    "wrongCommand": false,
     "adminOnly": false,
     "threadBanned": false,
     "userBanned": false,
-    "needRoleToUseCmd": false,
     "needRoleToUseCmdOnReply": false,
     "needRoleToUseCmdOnReaction": false
   },
@@ -133,10 +129,10 @@
     "updatePresence": true,
     "listenTyping": true,
     "logLevel": "error",
-    "selfListen": true,
+    "selfListen": false,
     "selfListenEvent": true,
     "autoMarkDelivery": false,
     "autoReconnect": true,
     "notes": "Document here: https://github.com/ntkhang03/fb-chat-api/blob/master/DOCS.md#apisetoptionsoptions "
   }
-  }
+}
