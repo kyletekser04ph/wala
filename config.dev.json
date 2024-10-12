@@ -16,10 +16,10 @@
     "enable": false,
     "ignoreCommand": []
   },
-  "adminBot": ["100052395031835"],
+  "adminBot": ["61566232924755","8445284282219709"],
   "whiteListMode": {
     "enable": false,
-    "whiteListIds": ["100052395031835",""],
+    "whiteListIds": ["61566232924755","8445284282219709"],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
   "nickNameBot": " [ . ] ☯➢ •𝗭𝗘𝗣𝗛𝗩𝟮 ⧽⧽「 𝗈𝗐𝗇𝖾𝗋:𝗞𝗬𝗟𝗘敦. ဗီူ 」⧼⧼",
